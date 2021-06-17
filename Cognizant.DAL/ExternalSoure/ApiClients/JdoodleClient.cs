@@ -1,10 +1,12 @@
 ﻿using Cognizant.BLL.Entities;
 using Cognizant.BLL.Results;
 using Cognizant.DAL.ExternalSoure.ApiClients.Abstracts;
+
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Cognizant.DAL.ExternalSoure.ApiClients
@@ -16,15 +18,13 @@ namespace Cognizant.DAL.ExternalSoure.ApiClients
         {
             httpClient = new HttpClient();
             httpClient.Timeout = new TimeSpan(0, 0, 0, 5);
-            httpClient.DefaultRequestHeaders.Accept.Clear();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<ExecuteResult<ResponseEntity>> Compile(IBaseExecuteCommandRequest baseExecuteCommandRequest)
         {
             try
             {
-                var executeResult = await httpClient.PostAsync(baseExecuteCommandRequest.ExecuteUrl, new StringContent(JsonConvert.SerializeObject(baseExecuteCommandRequest)));
+                var executeResult = await httpClient.PostAsync(baseExecuteCommandRequest.ExecuteUrl, new StringContent(JsonConvert.SerializeObject(baseExecuteCommandRequest), Encoding.UTF8, "application/json"));
                 if (executeResult.IsSuccessStatusCode)
                 {
                     var content = await executeResult.Content.ReadAsStringAsync();

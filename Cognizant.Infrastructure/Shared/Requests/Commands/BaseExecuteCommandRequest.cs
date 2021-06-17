@@ -6,19 +6,24 @@ namespace Cognizant.Infrastructure.Shared.Requests.Commands
     public abstract class BaseExecuteCommandRequest : IBaseExecuteCommandRequest
     {
 
-        private readonly IConfiguration _config;
-
-        public string ClientId => _config.GetSection("JdoodleApi:clientId").Value;
-        public string ClientSecret => _config.GetSection("JdoodleApi:clientSecret").Value;
-        public string ExecuteUrl => _config.GetSection("JdoodleApi:executeUrl").Value;
+        public string ClientId => _clientId;
+        public string ClientSecret => _clientSecret;
+        public string ExecuteUrl => _executeUrl;
         public string Stdin { get; set; }
         public string VersionIndex { get; set; } = "0";
-        public string Language { get; set; } = "0";
+        public string Language { get; set; } = "java";
         public string Script { get; set; }
-        public BaseExecuteCommandRequest(IConfiguration configuration)
-        {
-            _config = configuration;
-        }
 
+        private string _clientId;
+        private string _clientSecret;
+
+        private string _executeUrl;
+
+        public void SetParameters(string clientId, string clientSecret, string executeUrl)
+        {
+            _clientId = clientId;
+            _clientSecret = clientSecret;
+            _executeUrl = executeUrl;
+        }
     }
 }

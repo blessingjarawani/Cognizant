@@ -24,5 +24,11 @@ namespace Cognizant.DAL.Repositories
             return await _dbContext.Tasks.Where(x => x.IsActive).OrderBy(x=>x.Name)
                   .Select(y => TasksDTO.CreateDTO(y)).ToListAsync();
         }
+
+        public async Task<TasksDTO> GetTaskById(int id)
+        {
+            return await _dbContext.Tasks.Where(x => x.IsActive && x.Id ==id)
+                  .Select(y => TasksDTO.CreateDTO(y)).FirstOrDefaultAsync();
+        }
     }
 }

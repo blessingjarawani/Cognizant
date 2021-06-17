@@ -1,4 +1,6 @@
 using Cognizant.DAL.Contexts;
+using Cognizant.DAL.ExternalSoure.ApiClients;
+using Cognizant.DAL.ExternalSoure.ApiClients.Abstracts;
 using Cognizant.DAL.Repositories;
 using Cognizant.DAL.Repositories.Abstracts;
 using Cognizant.Infrastructure.Shared.Responses.Abstracts;
@@ -52,6 +54,7 @@ namespace Cognizant.Web
         private void RegisterServices(IServiceCollection services)
         {
             services.AddMediatR(typeof(IBaseResponse).GetTypeInfo().Assembly);
+            services.AddScoped<IJdoodleClient, JdoodleClient>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -10,5 +10,6 @@ namespace Cognizant.DAL.Repositories.Abstracts
     public interface ITasksRepository
     {
         Task<IEnumerable<TasksDTO>> GetAllTasks();
+        Task<TasksDTO> GetTaskById(int id);
     }
 }
