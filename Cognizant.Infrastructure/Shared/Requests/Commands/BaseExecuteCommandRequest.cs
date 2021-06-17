@@ -1,7 +1,7 @@
-﻿using Cognizant.Infrastructure.Shared.Requests.Abstracts;
+﻿using Cognizant.DAL.ExternalSoure.ApiClients.Abstracts;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-namespace Cognizant.Infrastructure.Shared.Requests
+namespace Cognizant.Infrastructure.Shared.Requests.Commands
 {
     public abstract class BaseExecuteCommandRequest : IBaseExecuteCommandRequest
     {

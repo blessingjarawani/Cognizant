@@ -21,7 +21,7 @@ namespace Cognizant.DAL.Repositories
 
         public async Task<IEnumerable<TasksDTO>> GetAllTasks()
         {
-            return await _dbContext.Tasks.Where(x => x.IsActive)
+            return await _dbContext.Tasks.Where(x => x.IsActive).OrderBy(x=>x.Name)
                   .Select(y => TasksDTO.CreateDTO(y)).ToListAsync();
         }
     }

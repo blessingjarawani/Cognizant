@@ -47,6 +47,7 @@ namespace Cognizant.Web
         private void RegisterRepositories(IServiceCollection services)
         {
             services.AddScoped<ITasksRepository, TasksRepository>();
+            services.AddScoped<IProgrammingLanguagesRepository, ProgrammingLanguagesRepository>();
         }
         private void RegisterServices(IServiceCollection services)
         {

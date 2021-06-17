@@ -1,7 +1,6 @@
 ﻿using Cognizant.BLL.Entities;
 using Cognizant.BLL.Results;
 using Cognizant.DAL.ExternalSoure.ApiClients.Abstracts;
-using Cognizant.Infrastructure.Shared.Requests.Abstracts;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;

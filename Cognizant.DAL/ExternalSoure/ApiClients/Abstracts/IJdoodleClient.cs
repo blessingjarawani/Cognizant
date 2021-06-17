@@ -1,6 +1,5 @@
 ﻿using Cognizant.BLL.Entities;
 using Cognizant.BLL.Results;
-using Cognizant.Infrastructure.Shared.Requests.Abstracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

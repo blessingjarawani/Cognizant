@@ -1,9 +1,14 @@
 ﻿using Newtonsoft.Json;
-namespace Cognizant.Infrastructure.Shared.Requests.Abstracts
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cognizant.DAL.ExternalSoure.ApiClients.Abstracts
 {
     public interface IBaseExecuteCommandRequest
     {
-
         [JsonProperty("clientId")]
         public string ClientId { get; }
         [JsonProperty("clientSecret")]

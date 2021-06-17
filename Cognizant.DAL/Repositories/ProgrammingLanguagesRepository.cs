@@ -20,6 +20,7 @@ namespace Cognizant.DAL.Repositories
         public async Task<IEnumerable<ProgrammingLanguagesDTO>> GetAll()
         {
             return await _dbContext.ProgrammingLanguages.Where(x => x.IsActive)
+                    .OrderBy(x => x.Name)
                     .Select(y => ProgrammingLanguagesDTO.CreateDTO(y)).ToListAsync();
         }
     }
