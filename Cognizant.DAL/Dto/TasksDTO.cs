@@ -8,5 +8,6 @@ namespace Cognizant.DAL.Dto
 {
     public class TasksDTO
     {
+        public int Id { get; set; }
     }
 }
