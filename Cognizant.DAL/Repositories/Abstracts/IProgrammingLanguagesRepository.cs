@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Cognizant.DAL.Repositories.Abstracts
 {
-    public interface ITasksRepository
+    public interface IProgrammingLanguagesRepository
     {
-        Task<IEnumerable<TasksDTO>> GetAllTasks();
+        Task<IEnumerable<ProgrammingLanguagesDTO>> GetAll();
     }
 }

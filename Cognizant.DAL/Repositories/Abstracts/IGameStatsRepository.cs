@@ -1,5 +1,4 @@
-﻿using Cognizant.DAL.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cognizant.DAL.Repositories.Abstracts
 {
-    public interface ITasksRepository
+    public interface IGameStatsRepository
     {
-        Task<IEnumerable<TasksDTO>> GetAllTasks();
     }
 }
