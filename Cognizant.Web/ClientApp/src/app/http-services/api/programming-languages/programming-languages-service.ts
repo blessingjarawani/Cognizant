@@ -8,7 +8,7 @@ import { GetProgrammingLanguagesQuery } from './queries/get-programming-language
 @Injectable({
   providedIn: 'root'
 })
-export class ProgrammingLanguagesServiceService {
+export class ProgrammingLanguagesService {
 
   constructor(private http: HttpClient) { }
 

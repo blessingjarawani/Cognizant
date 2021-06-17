@@ -8,7 +8,7 @@ import { GetTasksQuery } from './queries/get-tasks-query';
 @Injectable({
   providedIn: 'root'
 })
-export class ProgrammingTasksServiceService {
+export class ProgrammingTasksService {
 
   constructor(private http: HttpClient) { }
 

@@ -13,6 +13,7 @@ namespace Cognizant.DAL.Dto
         public string Description { get; private set; }
         public string InputParameters { get; private set; }
         public string ExpectedResult { get; private set; }
+        public string Name { get; private set; }
 
         public static TasksDTO CreateDTO(Tasks task)
         {
@@ -22,7 +23,8 @@ namespace Cognizant.DAL.Dto
                     Description = task.Description,
                     ExpectedResult = task.ExpectedOutPut,
                     InputParameters = task.InputParameter,
-                    Id = task.Id
+                    Id = task.Id,
+                    Name = task.Name
                 };
             return null;
         }
