@@ -48,6 +48,11 @@ namespace Cognizant.DAL.Repositories
                       TasksPassed = t.TasksPassed,
                       Average = ((float)t.TasksPassed / (float)t.TotalTasksTaken) * 100
                   }).Where(z => z.Average > 0).OrderByDescending(t => t.Average).Take(TopN).ToListAsync();
+        public async Task<string> GetTaskLastSuccessDate(string player, int taskId)
+           => (await _dbContext.GameStats
+            .FirstOrDefaultAsync(x => x.TaskId == taskId && x.PlayerName == player && x.IsActive && x.IsSuccess))
+            ?.CreatedDate.ToString("dd-MM-yyyy") ?? "";
+
 
 
     }

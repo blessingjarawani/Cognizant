@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cognizant.DAL.Migrations
 {
     [DbContext(typeof(ProgrammingTasksContext))]
-    [Migration("20210617084408_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210618130633_OneMigration")]
+    partial class OneMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,9 @@ namespace Cognizant.DAL.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsSuccess")
                         .HasColumnType("bit");
@@ -65,6 +68,9 @@ namespace Cognizant.DAL.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("KeyCode")
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
@@ -79,6 +85,28 @@ namespace Cognizant.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProgrammingLanguages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BaseSolutionCode = "public class MyClass {  public static void main(String args[]) {                }}",
+                            CreatedDate = new DateTime(2021, 6, 18, 15, 6, 32, 849, DateTimeKind.Local).AddTicks(9748),
+                            IsActive = true,
+                            KeyCode = "java",
+                            Name = "JAVA",
+                            UpdatedDate = new DateTime(2021, 6, 18, 15, 6, 32, 861, DateTimeKind.Local).AddTicks(1837)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BaseSolutionCode = "<?php ,         \r\n                                          \r\n                                             ?> ",
+                            CreatedDate = new DateTime(2021, 6, 18, 15, 6, 32, 861, DateTimeKind.Local).AddTicks(5084),
+                            IsActive = true,
+                            KeyCode = "php",
+                            Name = "PHP",
+                            UpdatedDate = new DateTime(2021, 6, 18, 15, 6, 32, 861, DateTimeKind.Local).AddTicks(5133)
+                        });
                 });
 
             modelBuilder.Entity("Cognizant.DAL.Tables.Tasks", b =>
@@ -101,6 +129,9 @@ namespace Cognizant.DAL.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -111,6 +142,30 @@ namespace Cognizant.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tasks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2021, 6, 18, 15, 6, 32, 865, DateTimeKind.Local).AddTicks(7580),
+                            Description = "Given a number n, print n-th Fibonacci Number.",
+                            ExpectedOutPut = "34",
+                            InputParameter = "9",
+                            IsActive = true,
+                            Name = "Fibonacci Series",
+                            UpdatedDate = new DateTime(2021, 6, 18, 15, 6, 32, 865, DateTimeKind.Local).AddTicks(7676)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2021, 6, 18, 15, 6, 32, 865, DateTimeKind.Local).AddTicks(7689),
+                            Description = "Program to find sum of elements in a given array elements InputArray 12,3,4,15",
+                            ExpectedOutPut = "34",
+                            InputParameter = "0",
+                            IsActive = true,
+                            Name = "Sum of elements array",
+                            UpdatedDate = new DateTime(2021, 6, 18, 15, 6, 32, 865, DateTimeKind.Local).AddTicks(7702)
+                        });
                 });
 
             modelBuilder.Entity("Cognizant.DAL.Tables.GameStats", b =>

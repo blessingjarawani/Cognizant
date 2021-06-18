@@ -32,6 +32,9 @@ namespace Cognizant.Infrastructure.Shared.RequestHandlers.CommandHandlers
                 var task = await _taskRepository.GetTaskById(request.TaskId);
                 if (task == null)
                     return BaseResponse.CreateFail("Selected Task does not exists");
+                var taskLastSuccesDate = await _gameStatsRepository.GetTaskLastSuccessDate(request.PlayerName, task.Id);
+                if (!string.IsNullOrWhiteSpace(taskLastSuccesDate))
+                    return BaseResponse.CreateFail($"You have already done the Task on {taskLastSuccesDate}");
                 request.Stdin = task.InputParameter;
                 var compilationResult = await _jdoodleClient.Compile(request);
                 if (!compilationResult.IsSuccess)

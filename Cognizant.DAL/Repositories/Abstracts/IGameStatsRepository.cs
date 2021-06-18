@@ -11,5 +11,6 @@ namespace Cognizant.DAL.Repositories.Abstracts
     {
         Task<bool> SaveChanges(TaskResultDTO taskResult);
         Task<IEnumerable<GameStatsTopNDTO>> GetTopN(int TopN);
+        Task<string> GetTaskLastSuccessDate(string player, int taskId);
     }
 }

@@ -9,6 +9,8 @@ import { ProgrammingTasksService } from '../http-services/api/programming-tasks/
 import { GetTasksQuery } from '../http-services/api/programming-tasks/queries/get-tasks-query';
 import { ProgrammingLanguagesDTO } from '../http-services/dtos/programming-languages-dto';
 import { TasksDTO } from '../http-services/dtos/tasks-dto';
+import { ToastrService } from 'ngx-toastr';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-tasks-compiler',
   templateUrl: './tasks-compiler.component.html',
@@ -22,7 +24,8 @@ export class TasksCompilerComponent implements OnInit {
   form: FormGroup;
   isProcessing: boolean;
   constructor(private fb: FormBuilder, private programmingLanguagesService: ProgrammingLanguagesService,
-    private programmingTasksService: ProgrammingTasksService, private compilerService: CompilerService) { }
+    private programmingTasksService: ProgrammingTasksService, private compilerService: CompilerService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getTasks();
@@ -38,7 +41,6 @@ export class TasksCompilerComponent implements OnInit {
       console.log(x);
       if (x.isSuccess) {
         this.tasks = x.result;
-        console.log(this.tasks);
       }
     })
   }
@@ -91,7 +93,15 @@ export class TasksCompilerComponent implements OnInit {
     let command = this.buildComplieCommand();
     this.compilerService.compile(command)
       .subscribe(t => {
-        console.log(t);
+        if (t.isSuccess) {
+          if (t.message) {
+            this.toastr.error(t.message, "Error");
+          } else {
+            this.toastr.success("Correct", "Done");
+          }
+        } else {
+          this.toastr.error(t.message, "Error");
+        }
         this.isProcessing = false;
       })
   }

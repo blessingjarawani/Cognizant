@@ -1,10 +1,6 @@
 ﻿using Cognizant.BLL.Results;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Cognizant.BLL.Entities.Validators
 {
     public abstract class ValidateExecutor
