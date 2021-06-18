@@ -32,10 +32,11 @@ namespace Cognizant.Infrastructure.Shared.RequestHandlers.CommandHandlers
                 var task = await _taskRepository.GetTaskById(request.TaskId);
                 if (task == null)
                     return BaseResponse.CreateFail("Selected Task does not exists");
+                request.Stdin = task.InputParameter;
                 var compilationResult = await _jdoodleClient.Compile(request);
                 if (!compilationResult.IsSuccess)
                     return BaseResponse.CreateFail(compilationResult.Message);
-                var executionValidator = new ResultsValidatorEntity(compilationResult.Result,task.ExpectedOutput);
+                var executionValidator = new ResultsValidatorEntity(compilationResult.Result, task.ExpectedOutput);
                 var executionResult = executionValidator.Execute();
                 var taskResult = new TaskResultDTO(task.Id, request.PlayerName, executionResult.IsSuccess);
                 await _gameStatsRepository.SaveChanges(taskResult);

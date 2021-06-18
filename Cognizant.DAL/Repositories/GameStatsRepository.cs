@@ -2,6 +2,7 @@
 using Cognizant.DAL.Dto;
 using Cognizant.DAL.Repositories.Abstracts;
 using Cognizant.DAL.Tables;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +31,24 @@ namespace Cognizant.DAL.Repositories
             await _dbContext.GameStats.AddAsync(entity);
             return await _dbContext.SaveChangesAsync() > 0;
         }
+
+        public async Task<IEnumerable<GameStatsTopNDTO>> GetTopN(int TopN)
+        => await _dbContext.GameStats
+                  .GroupBy(x => x.PlayerName)
+                  .Select(g => new
+                  {
+                      PlayerName = g.Key,
+                      TotalTasksTaken = g.Count(x => x.IsActive),
+                      TasksPassed = g.Count(x => x.IsActive && x.IsSuccess),
+
+                  }).Select(t => new GameStatsTopNDTO
+                  {
+                      PlayerName = t.PlayerName,
+                      TotalTasksTaken = t.TotalTasksTaken,
+                      TasksPassed = t.TasksPassed,
+                      Average = ((float)t.TasksPassed / (float)t.TotalTasksTaken) * 100
+                  }).Where(z => z.Average > 0).OrderByDescending(t => t.Average).Take(TopN).ToListAsync();
+
+
     }
 }

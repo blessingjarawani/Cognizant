@@ -6,8 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { TasksCompilerComponent } from './tasks-compiler/tasks-compiler.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -50,14 +48,15 @@ import { PlatformModule } from '@angular/cdk/platform';
 import { ObserversModule } from '@angular/cdk/observers';
 import { PortalModule } from '@angular/cdk/portal';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GamePlayerStatsComponent } from './game-player-stats/game-player-stats.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    TasksCompilerComponent
+    TasksCompilerComponent,
+    GamePlayerStatsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -104,12 +103,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     ObserversModule,
     OverlayModule,
     PlatformModule,
+    BrowserAnimationsModule,
     PortalModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: TasksCompilerComponent, pathMatch: 'full' },
-      { path: 'counter', component: TasksCompilerComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'tasks-compiler', component: TasksCompilerComponent },
+      { path: 'game-player-stats', component: GamePlayerStatsComponent },
     ])
   ],
   providers: [],

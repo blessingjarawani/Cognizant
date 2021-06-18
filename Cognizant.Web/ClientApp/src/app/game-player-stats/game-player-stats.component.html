@@ -1,0 +1,19 @@
+<form class="form">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">NAME</th>
+        <th scope="col">SUCCESS SOLUTIONS</th>
+        <th scope="col">TASKS</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td>{{item.playerName}}</td>
+        <td>{{item.tasksPassed}}</td>
+        <td>{{item.totalTasksTaken}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</form>

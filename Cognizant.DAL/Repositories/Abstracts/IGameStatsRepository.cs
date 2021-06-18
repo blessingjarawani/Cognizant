@@ -10,5 +10,6 @@ namespace Cognizant.DAL.Repositories.Abstracts
     public interface IGameStatsRepository
     {
         Task<bool> SaveChanges(TaskResultDTO taskResult);
+        Task<IEnumerable<GameStatsTopNDTO>> GetTopN(int TopN);
     }
 }
