@@ -21,8 +21,13 @@ namespace Cognizant.BLL.Entities
             AddFunction(() => CheckIfOutPutCorrect());
         }
 
-        private ExecuteResult CheckIfOutPutCorrect() =>
-           CreateResult(_response.Output?.Replace(" ", "") != _expectedOutput.Replace(" ", ""), $"Invalid OutPut Expected {_expectedOutput} Returned {_response.Output}");
+        private ExecuteResult CheckIfOutPutCorrect()
+        {
+            var expected = _response.Output?.Replace("\n", "").Replace("\r", "").Replace(" ", "");
+            var result = _expectedOutput.Replace("\n", "").Replace("\r", "").Replace(" ", "");
+            return CreateResult(expected != result, $"Invalid OutPut Expected {expected} Returned {result}");
+        }
+
         private ExecuteResult CheckIfExecuted() =>
           CreateResult(string.IsNullOrWhiteSpace(_response.Memory) && string.IsNullOrWhiteSpace(_response.CpuTime), $"Programming has Errors :  {_response.Output}");
     }
