@@ -1,4 +1,5 @@
 ﻿using Cognizant.BLL.Entities;
+using Cognizant.DAL.Dto;
 using Cognizant.DAL.ExternalSoure.ApiClients.Abstracts;
 using Cognizant.DAL.Repositories.Abstracts;
 using Cognizant.Infrastructure.Shared.Requests.Commands;
@@ -15,11 +16,13 @@ namespace Cognizant.Infrastructure.Shared.RequestHandlers.CommandHandlers
     {
         private readonly IJdoodleClient _jdoodleClient;
         private readonly ITasksRepository _taskRepository;
+        private readonly IGameStatsRepository _gameStatsRepository;
 
-        public CompileCommandHandler(IJdoodleClient jdoodleClient, ITasksRepository taskRepository)
+        public CompileCommandHandler(IJdoodleClient jdoodleClient, ITasksRepository taskRepository, IGameStatsRepository gameStatsRepository)
         {
             _jdoodleClient = jdoodleClient;
             _taskRepository = taskRepository;
+            _gameStatsRepository = gameStatsRepository;
         }
 
         public async Task<IBaseResponse> Handle(CompileCommand request, CancellationToken cancellationToken)
@@ -32,8 +35,10 @@ namespace Cognizant.Infrastructure.Shared.RequestHandlers.CommandHandlers
                 var compilationResult = await _jdoodleClient.Compile(request);
                 if (!compilationResult.IsSuccess)
                     return BaseResponse.CreateFail(compilationResult.Message);
-                var executionValidator = new ResultsValidatorEntity(compilationResult.Result,task.ExpectedResult);
+                var executionValidator = new ResultsValidatorEntity(compilationResult.Result,task.ExpectedOutput);
                 var executionResult = executionValidator.Execute();
+                var taskResult = new TaskResultDTO(task.Id, request.PlayerName, executionResult.IsSuccess);
+                await _gameStatsRepository.SaveChanges(taskResult);
                 if (!executionResult.IsSuccess)
                     return BaseResponse.CreateFail(executionResult.Message);
                 return BaseResponse.CreateSuccess();

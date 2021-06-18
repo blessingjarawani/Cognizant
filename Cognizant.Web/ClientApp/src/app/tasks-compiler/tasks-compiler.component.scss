@@ -11,3 +11,6 @@
   overflow-y: scroll;
   height:150px;
   }
+  .ng-touched.ng-invalid {
+    border-color: red !important;
+  }

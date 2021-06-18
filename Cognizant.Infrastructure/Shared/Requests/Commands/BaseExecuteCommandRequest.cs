@@ -11,7 +11,7 @@ namespace Cognizant.Infrastructure.Shared.Requests.Commands
         public string ExecuteUrl => _executeUrl;
         public string Stdin { get; set; }
         public string VersionIndex { get; set; } = "0";
-        public string Language { get; set; } = "java";
+        public string Language { get; set; }
         public string Script { get; set; }
 
         private string _clientId;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cognizant.DAL.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Cognizant.DAL.Repositories.Abstracts
 {
     public interface IGameStatsRepository
     {
+        Task<bool> SaveChanges(TaskResultDTO taskResult);
     }
 }

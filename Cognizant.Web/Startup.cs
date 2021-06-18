@@ -50,6 +50,7 @@ namespace Cognizant.Web
         {
             services.AddScoped<ITasksRepository, TasksRepository>();
             services.AddScoped<IProgrammingLanguagesRepository, ProgrammingLanguagesRepository>();
+            services.AddScoped<IGameStatsRepository, GameStatsRepository>();
         }
         private void RegisterServices(IServiceCollection services)
         {
