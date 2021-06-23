@@ -11,7 +11,7 @@ namespace Cognizant.DAL.Tables
     {
         [StringLength(100)]
         public string Name { get; set; }
-        [StringLength(5)]
+        [StringLength(8)]
         public string KeyCode { get; set; }
         [StringLength(200)]
         public String BaseSolutionCode { get; set; }
