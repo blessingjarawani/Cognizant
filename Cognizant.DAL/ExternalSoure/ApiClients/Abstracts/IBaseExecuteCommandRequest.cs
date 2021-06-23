@@ -22,5 +22,6 @@ namespace Cognizant.DAL.ExternalSoure.ApiClients.Abstracts
         [JsonProperty("language")]
         public string Language { get; set; }
         public string ExecuteUrl { get; }
+        void SetParameters(string clientId, string clientSecret, string executeUrl);
     }
 }
