@@ -29,8 +29,7 @@ namespace Cognizant.BLL.Entities.Validators
 
         protected ExecuteResult CreateResult(bool notValid, string errorMessage) => notValid ? ExecuteResult.Fail(errorMessage) : ExecuteResult.Success();
 
-        protected ExecuteResult CreateResultIfEdited(bool notValid, bool edited, string errorMessage) => (notValid && edited) ? ExecuteResult.Fail(errorMessage) : ExecuteResult.Success();
-    }
+      }
 }
 
 
